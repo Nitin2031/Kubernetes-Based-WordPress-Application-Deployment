@@ -23,6 +23,25 @@ spec:
         app: wordpress
 
     spec:
+      tolerations:
+        - key: "wpnode"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+      
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - wordpress
+                topologyKey: kubernetes.io/hostname
+                  
       containers:
         - name: wordpress
           image: wordpress:6.4
