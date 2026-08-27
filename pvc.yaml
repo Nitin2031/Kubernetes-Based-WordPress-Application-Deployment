@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: wp-production
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: local-rancher-storage
+
+  resources:
+    requests:
+      storage: 5Gi
